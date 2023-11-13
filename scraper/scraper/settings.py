@@ -54,12 +54,12 @@ COOKIES_ENABLED = False
 #    "scraper.middlewares.ScraperDownloaderMiddleware": 543,
 # }
 
-# DOWNLOADER_MIDDLEWARES = {
-#     "rotating_proxies.middlewares.RotatingProxyMiddleware": 610,
-#     "rotating_proxies.middlewares.BanDetectionMiddleware": 620,
-# }
-# ROTATING_PROXY_LIST_PATH = "proxy-list.txt"
-# ROTATING_PROXY_PAGE_RETRY_TIMES = 5
+DOWNLOADER_MIDDLEWARES = {
+    "rotating_proxies.middlewares.RotatingProxyMiddleware": 610,
+    "rotating_proxies.middlewares.BanDetectionMiddleware": 620,
+}
+ROTATING_PROXY_LIST_PATH = "proxy-list.txt"
+ROTATING_PROXY_PAGE_RETRY_TIMES = 5
 
 # Enable or disable extensions
 # See https://docs.scrapy.org/en/latest/topics/extensions.html
