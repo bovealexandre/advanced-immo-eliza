@@ -56,6 +56,5 @@ def preprocessing(df):
 
     df = df.drop(columns=["property_id"], errors="ignore")
     df = df.dropna(subset=["price", "region", "province"])
-    df.to_csv("datas.csv")
 
     return df

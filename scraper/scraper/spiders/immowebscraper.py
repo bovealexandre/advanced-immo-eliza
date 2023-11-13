@@ -11,24 +11,10 @@ from utils.func import get_nested_value
 class ImmowebScraper(scrapy.Spider):
     name = "immowebscraper"
     allowed_domains = ["www.immoweb.be"]
-    # start_urls = [
-    #     f"https://www.immoweb.be/fr/recherche/maison/a-vendre?countries=BE&page={x+1}&orderBy=newest"
-    #     for x in range(0, 332)
-    # ]
-    proxies = []
-
-    def start_requests(self):
-        proxy_file = open("proxy-list.txt", "r")
-        lines = proxy_file.readlines()
-        for line in lines:
-            if line.startswith("http://"):
-                self.proxies.append(line.strip())
-        for url in self.start_urls:
-            return Request(
-                f"https://www.immoweb.be/fr/recherche/maison/a-vendre?countries=BE&page={x+1}&orderBy=newest",
-                callback=self.parse,
-                meta={"proxy": random.choice(self.proxies)},
-            )
+    start_urls = [
+        f"https://www.immoweb.be/fr/recherche/maison/a-vendre?countries=BE&page={x+1}&orderBy=newest"
+        for x in range(0, 332)
+    ]
 
     def parse(self, response):
         urls = response.xpath('//a[@class="card__title-link"]/@href').extract()
@@ -36,7 +22,6 @@ class ImmowebScraper(scrapy.Spider):
             yield Request(
                 u,
                 callback=self.parse_property,
-                meta={"proxy": random.choice(self.proxies)},
             )
 
     def parse_property(self, response):
